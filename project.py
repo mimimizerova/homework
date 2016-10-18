@@ -4,8 +4,7 @@ import html
 import re
 import csv
 
-def download_page(pageUrl):
-    url = 'https://habrahabr.ru/'  
+def download_page(pageUrl):  
     user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)'  
     try:
         page = urllib.request.Request(pageUrl, headers={'User-Agent':user_agent})
@@ -63,7 +62,17 @@ def find_date(html):
         return '01.01.2001'
 
 
-
+def clear_table(file, clearfile): # Ну, я же обещала код, который будет чистить таблицу
+    f = open(file, 'r', encoding = 'utf-8')
+    a = [line.strip() for line in f.readlines()]
+    f.close()
+    for line in a:
+        if not line.find('01.01.1970') == -1:
+            f1 = open(clearfile, 'a', encoding = 'utf-8')
+            f1.write(line+'\n')
+            f1.close()
+        
+        
 
 commonUrl = 'http://newspaper.moe-online.ru/view/'
 s=''
@@ -89,13 +98,14 @@ for i in range(217345, 241000):
         doc.write(clear_html(download_page(pageUrl)))
         doc.close()
     except:
-        s+='%s '%(name)
-    file = open('metadata.txt', 'a', encoding = 'utf-8')
-    s1 = '%s\t%s\t\t\t%s\t%s\t\t'%(name, find_author(download_page(pageUrl)),find_name(download_page(pageUrl)), find_date(download_page(pageUrl)))
-    s2 = '\t\t\t\tнейтральный\tн-возраст\tн-уровень\tгородская\t'
-    s3 = '%s\tМОЁ\t\t%s\tгазета\tРоссия\tВоронеж\tru'%(pageUrl, a[2])
-    file.write (s1+s2+s3+'\n')
-    file.close()
+        s+='%s '%(name) #я это делала для того, чтоб иметь список страниц, у которых были какие-то проблемы с кодировкой и просто почистить от них компьютер
+    if not find_date(download_page(pageUrl)) == '01.01.1970' and not find_date(download_page(pageUrl)) == '01.01.2001': #придумала, как избежать лишних строк в таблице 
+                     file = open('metadata2.txt', 'a', encoding = 'utf-8')
+                     s1 = '%s\t%s\t\t\t%s\t%s\t\t'%(name, find_author(download_page(pageUrl)),find_name(download_page(pageUrl)), find_date(download_page(pageUrl)))
+                     s2 = '\t\t\t\tнейтральный\tн-возраст\tн-уровень\tгородская\t'
+                     s3 = '%s\tМОЁ\t\t%s\tгазета\tРоссия\tВоронеж\tru'%(pageUrl, a[2])
+                     file.write(s1+s2+s3+'\n')
+                     file.close()
 
 
 
@@ -115,7 +125,7 @@ for j in range (2007, 2016):
                 os.system(mystem_plain)
                 os.system(mystem_xml)
 
-        
+clear_table('metadata.txt', 'metadata1.txt')        
 
         
 
