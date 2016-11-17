@@ -77,7 +77,7 @@ def search():
         f.close()
         b = []
         for i in range (len(words)):
-            if word in words[i]:
+            if word == words[i].strip(':'):
                 if word.startswith('пона'):
                     b.append('<b>'+word+'</b>'+' '+words[i+1])
                 elif word.isdigit() and int(word) <= 5 and word==words[i]:
