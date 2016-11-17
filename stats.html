@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawMaterial);
+
+function drawMaterial() {
+      var data = google.visualization.arrayToDataTable([
+        ['Слово', 'Rate'],
+        ['Понавыдумывать', {{p1}}],
+        ['Понаоткрывать', {{p2}}],
+        ['Понаприклеить', {{p3}}],
+        ['Понаубираться', {{p4}}],
+        ['Понарассказать', {{p5}}],
+        ['Поназакрасить', {{p6}}],
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Популярность приставочных глаголов на "пона"'
+        },
+        hAxis: {
+          title: 'Total Population',
+          minValue: 0,
+        },
+        vAxis: {
+          title: 'City'
+        },
+        bars: 'horizontal'
+      };
+      var material = new google.charts.Bar(document.getElementById('chart_div'));
+      material.draw(data, options);
+    }
+    </script>
+  </head>
+  <body>
+<h1>Всего опрос прошло {{n}} человек</h1>
+<h2>
+Из них {{m}} % мужчин и {{k}}% женщин
+</h2>
+<h3>
+<div id="chart_div" style="width: 600px; height: 400px;"></div>
+</h3>
+
+
+</body>
+</html>
