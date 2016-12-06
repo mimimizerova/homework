@@ -85,17 +85,60 @@ for el in minus_mnoj:
     
 minus.sort()
 
+
+A1 = arr(amin)
+B1 = arr(bmin)
+C1 = arr(cmin)
+D1 = arr(dmin)
+
+
+dic1 = {A[i]:0 for i in range (len(A))}
+dic2 = {B[i]:0 for i in range (len(B))}
+dic3 = {C[i]:0 for i in range (len(C))}
+dic4 = {D[i]:0 for i in range (len(D))}
+
+for el in A:
+    dic1[el]+=1
+
+for el in A1:
+    if dic1[el]>1:
+        clever.append(el)
+        
+for el in B:
+    dic2[el]+=1
+
+for el in B1:
+    if dic2[el]>1:
+        clever.append(el)
+        
+for el in C:
+    dic3[el]+=1
+
+for el in C1:
+    if dic3[el]>1:
+        clever.append(el)
+
+for el in D:
+    dic4[el]+=1
+
+for el in D1:
+    if dic4[el]>1:
+        clever.append(el)
+
+
+clever.sort()
+
 f = open ( 'intersection.txt', 'a', encoding = 'utf-8')
 for el in plus:
     f.write(el+'\n')
 doc = open ('symmetric_difference.txt', 'a', encoding = 'utf-8')
 for el in minus:
     doc.write(el+'\n')
+
+file = open ( 'clever_symmetric_difference.txt', 'a', encoding = 'utf-8')
+for el in clever:
+    file.write(el+'\n')
+
 f.close()
 doc.close()
-
-
-
-    
-
-    
+file.close()
