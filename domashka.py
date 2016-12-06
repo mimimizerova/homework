@@ -22,7 +22,7 @@ def clear_html (unclear_text):
         arr = el.split()
         for word in arr:
             clear_word=''
-            for j in range (len(word)):
+            for j in range (len(word)): #смотрите объяснение этому циклу в readme
                 if word[j].isalpha() or word[j].isdigit():
                     clear_word+=word[j]
             if clear_word != '':
