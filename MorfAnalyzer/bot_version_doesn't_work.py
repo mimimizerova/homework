@@ -1,3 +1,5 @@
+#Имя бота - @WordchangeBot
+#Я не знаю в чём проблема, кажется, в кодировках...
 import telebot 
 import conf
 import random
